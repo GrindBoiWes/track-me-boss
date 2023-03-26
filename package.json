@@ -1,0 +1,17 @@
+{
+  "name": "track-me-boss",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "ascii-art": "^2.8.5",
+    "console.table": "^0.10.0",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "inquirer": "^9.1.5",
+    "mysql2": "^3.2.0"
+  }
+}
