@@ -1,21 +1,31 @@
-INSERT INTO department (id, name)
-VALUES (001,'Sales');
-       (002,'Marketing');
-       (003,'Engineering');
+USE employee_tracker
+
+INSERT INTO departments (id, name)
+VALUES ('Sales');
+       ('Marketing');
+       ('Engineering');
+       ('Legal');
        
 
 
 INSERT INTO roles (id, title, salary, department_id)
-VALUES (101,'Sales Manager', 125000, 001);
-       (102,'Sales Representative', 75000, 001);
-       (103,'Marketing Manager', 115000, 002);
-       (104,'Engineering Manager', 130000, 003);
-       (105, 'Software Engineer', 95000, 003);
+VALUES ('Sales Manager', 125000, 1);
+       ('Sales Representative', 75000, 1);
+       ('Marketing Manager', 115000, 2);
+       ('Engineering Manager', 130000, 3);
+       ('Software Engineer', 95000, 3);
+       ('Account Manager', 160000, 3),
+       ('Accountant', 125000, 3),
+       ('Legal Team Lead', 250000, 4),
+       ('Lawyer', 190000, 4);
 
 INSERT INTO employees (id, first_name, last_name, role_id, manager_id)
-VALUES (201,'Angelica','Jannone', 001, 101);
-       (202,'Billy', 'Hamilton', 001, null);
-       (203,'Lauren','Shephard', 002, 103);
-       (204,'Jerry', 'Ratledge', 003, 104);
-       (205,'Pat', 'Fiorentino', 003, 105);
+VALUES ('John', 'Doe', 1, NULL),
+       ('Mike', 'Chan', 2, 1),
+       ('Ashley', 'Rodriguez', 3, NULL),
+       ('Kevin', 'Tupik', 4, 3),
+       ('Kunal', 'Singh', 5, NULL),
+       ('Malia', 'Brown', 6, 5),
+       ('Sarah', 'Lourd', 7, NULL),
+       ('Tom', 'Allen', 8, 7);
     
