@@ -19,6 +19,12 @@ function startMenu() {
             'Add A Role',
             'Add An Employee',
             'Update An Employee Role',
+            'Update An Employee Manager',
+            'View Employees By Manager',
+            'View Employees By Department',
+            'Delete A Department',
+            'Delete A Role',
+            'Delete An Employee',
             'Quit'
         ]
       })
@@ -51,6 +57,30 @@ function startMenu() {
 
             case 'Update An Employee Role':
                 database.updateEmployee();
+                break;
+
+            case 'Update An Employee Manager':
+                database.updateEmployeeManager();
+                break;
+
+            case 'View Employees By Manager':
+                database.viewEmployeesByManager();
+                break;
+
+            case 'View Employees By Department':
+                database.viewEmployeesByDepartment;
+                break;
+
+            case 'Delete A Department':
+                database.deleteDepartment();
+                break;
+
+            case 'Delete A Role':
+                database.deleteRole();
+                break;
+
+            case 'Delete An Employee':
+                database.deleteEmployee();
                 break;
 
             case 'Quit':
