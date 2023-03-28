@@ -68,7 +68,7 @@ function startMenu() {
                 break;
 
             case 'View Employees By Department':
-                database.viewEmployeesByDepartment;
+                database.viewEmployeesByDepartment();
                 break;
 
             case 'Delete A Department':
