@@ -1,9 +1,22 @@
 const inquirer = require('inquirer');
 const database = require('./db/database');
 const logo = require('ascii-art');
-const logoImg = logo({name: "Track Me Boss!"}).render();
+logo.font('Track Me Boss!', 'Doom', function(rendered){
+    console.log(rendered);
+})
 
-console.log(logoImg);
+const {
+    viewDepartments,
+    viewRoles,
+    viewEmployees,
+    addDepartment,
+    addEmployee,
+    updateEmployeeRole,
+    deleteDepartment,
+    deleteRole,
+    deleteEmployee,
+   
+} = require('./db/database')
 
 function startMenu() {
     inquirer
@@ -16,7 +29,6 @@ function startMenu() {
             'View All Roles',
             'View All Employees',
             'Add A Department',
-            'Add A Role',
             'Add An Employee',
             'Update An Employee Role',
             'Update An Employee Manager',
@@ -32,55 +44,52 @@ function startMenu() {
 
         switch(answer.action) {
             case 'View All Departments':
-                database.viewDepartments();
+                viewDepartments();
                 break;
             
             case 'View All Roles':
-                database.viewRoles();
+                viewRoles();
                 break;
 
             case 'View All Employees':
-                database.viewEmployees();
+                viewEmployees();
                 break;
 
             case 'Add A Department':
-                database.addDepartment();
+                addDepartment();
                 break;
 
-            case 'Add A Role':
-                database.addRole();
-                break;
 
             case 'Add An Employee':
-                database.addEmployee();
+                addEmployee();
                 break;
 
             case 'Update An Employee Role':
-                database.updateEmployee();
+                updateEmployeeRole();
                 break;
 
             case 'Update An Employee Manager':
-                database.updateEmployeeManager();
+                updateEmployeeManager();
                 break;
 
             case 'View Employees By Manager':
-                database.viewEmployeesByManager();
+                viewEmployeesByManager();
                 break;
 
             case 'View Employees By Department':
-                database.viewEmployeesByDepartment();
+                viewEmployeesByDepartment();
                 break;
 
             case 'Delete A Department':
-                database.deleteDepartment();
+                deleteDepartment();
                 break;
 
             case 'Delete A Role':
-                database.deleteRole();
+                deleteRole();
                 break;
 
             case 'Delete An Employee':
-                database.deleteEmployee();
+                deleteEmployee();
                 break;
 
             case 'Quit':
