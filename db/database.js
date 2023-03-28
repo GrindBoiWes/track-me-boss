@@ -17,37 +17,37 @@ function viewDepartments() {
         'SELECT id, name FROM departments',
         function (err, res) {
             if (err) throw err;
-            console.table(res);
-            startMenu();
+            console.log(res);
+           
         }
     );
 }
 
 function viewRoles() {
     dbConnect.query(
-        `SELECT roles.id, roles.title, departments.name AS department, roles.salary
+        `SELECT roles.id, roles.title, department.name AS departments, roles.salary
         FROM roles
         JOIN departments ON roles.department_id = departments.id`,
         function (err, res) {
             if (err) throw err;
-            console.table(res);
-            startMenu();
+            console.log(res);
+           
         }
     );
 }
 
 function viewEmployees() {
     dbConnect.query(
-        `SELECT employees.id, employees.first_name, employees.last_name, roles.title, departments.name AS department, roles.salary,
+        `SELECT employees.id, employees.first_name, employees.last_name, roles.title, department.name AS departments, roles.salary,
         CONCAT(managers.first_name, ' ', managers.last_name) AS manager
         FROM employees
-        LEFT JOIN roles ON employees.role_id = roles.id
+        LEFT JOIN roles ON employee.role_id = roles.id
         LEFT JOIN departments ON roles.department_id = departments.id
-        LEFT JOIN employees AS managers ON employees.manager_id = managers.id`,
+        LEFT JOIN employee AS managers ON employee.manager_id = managers.id`,
         function (err, res) {
             if (err) throw err;
-            console.table(res);
-            startMenu();
+            console.log(res);
+           
         }
     );
 }
@@ -66,7 +66,6 @@ function addDepartment() {
                 function (err, res) {
                     if (err) throw err;
                     console.log(`\n${res.affectedRows} department inserted!\n`);
-                    startMenu();
                 }
             );
         });
@@ -245,7 +244,7 @@ function updateEmployeeManager() {
 
 function viewEmployeesByManager() {
     dbConnect.query(
-        `SELECT CONCAT(managers.first_name, ' ', managers.last_name) AS manager, employees.id, employees.first_name, employees.last_name, roles.title, departments.name AS department, roles.salary
+        `SELECT CONCAT(managers.first_name, ' ', managers.last_name) AS manager, employees.id, employees.first_name, employees.last_name, roles.title, department.name AS department, roles.salary
         FROM employees
         LEFT JOIN roles ON employees.role_id = roles.id
         LEFT JOIN departments ON roles.department_id = departments.id
@@ -264,7 +263,7 @@ function viewEmployeesByDepartment() {
         `SELECT departments.name AS department, employees.id, employees.first_name, employees.last_name, roles.title, roles.salary
         FROM employees
         LEFT JOIN roles ON employees.role_id = roles.id
-        LEFT JOIN departments ON roles.department_id = departments.id
+        LEFT JOIN department ON roles.department_id = department.id
         ORDER BY department, employees.last_name`,
         function (err, res) {
             if (err) throw err;
@@ -303,7 +302,7 @@ function deleteRole() {
         })
         .then(function (answer) {
             dbConnect.query(
-                'DELETE FROM roles WHERE ?',
+                'DELETE FROM role WHERE ?',
                 { id: answer.roleId },
                 function (err, res) {
                     if (err) throw err;

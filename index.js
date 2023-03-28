@@ -1,9 +1,6 @@
 const inquirer = require('inquirer');
 const database = require('./db/database');
-const logo = require('ascii-art');
-logo.font('Track Me Boss!', 'Doom', function(rendered){
-    console.log(rendered);
-})
+require('console.table');
 
 const {
     viewDepartments,
@@ -45,14 +42,17 @@ function startMenu() {
         switch(answer.action) {
             case 'View All Departments':
                 viewDepartments();
+                startMenu();
                 break;
             
             case 'View All Roles':
                 viewRoles();
+                startMenu();
                 break;
 
             case 'View All Employees':
                 viewEmployees();
+                startMenu();
                 break;
 
             case 'Add A Department':
