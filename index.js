@@ -1,6 +1,6 @@
 const inquirer = require('inquirer');
 const database = require('./db/database');
-const logo = require('asciiart-logo');
+const logo = require('ascii-art');
 const logoImg = logo({name: "Track Me Boss!"}).render();
 
 console.log(logoImg);
