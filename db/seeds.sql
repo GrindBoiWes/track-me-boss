@@ -1,19 +1,19 @@
-USE employee_tracker
+USE employee_tracked;
 
 INSERT INTO department (id, name)
-VALUES ('Sales');
-       ('Marketing');
-       ('Engineering');
+VALUES ('Sales'),
+       ('Marketing'),
+       ('Engineering'),
        ('Legal');
        
 
 
 INSERT INTO role (id, title, salary, department_id)
-VALUES ('Sales Manager', 125000, 1);
-       ('Sales Representative', 75000, 1);
-       ('Marketing Manager', 115000, 2);
-       ('Engineering Manager', 130000, 3);
-       ('Software Engineer', 95000, 3);
+VALUES ('Sales Manager', 125000, 1),
+       ('Sales Representative', 75000, 1),
+       ('Marketing Manager', 115000, 2),
+       ('Engineering Manager', 130000, 3),
+       ('Software Engineer', 95000, 3),
        ('Account Manager', 160000, 3),
        ('Accountant', 125000, 3),
        ('Legal Team Lead', 250000, 4),
