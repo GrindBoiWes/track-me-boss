@@ -98,7 +98,7 @@ function viewDepartments() {
         function (err, res) {
             if (err) throw err;
             console.log(res);
-           
+           startMenu();
         }
     );
 }
@@ -157,36 +157,36 @@ function addRole() {
       'SELECT * FROM departments',
         function (err, departments) {
           if (err) throw err;
-           inquirer
-            .prompt([
-              {
-                name: 'title',
-                type: 'input',
-                message: 'Enter the title of the role:'
-               },
-               {
-                name: 'salary',
-                 type: 'input',
-                 message: 'Enter the salary of the role:'
-                },
-                {
-                name: 'department',
-                type: 'list',
-                message: 'Choose the department:',
-                choices: departments.map(department => ({ name: department.name, value: department.id }))
-                }
-                ])
-                .then(function (answer) {
-                    dbConnect.query(
-                        'INSERT INTO roles SET ?',
-                        { title: answer.title, salary: answer.salary, department_id: answer.department },
-                        function (err, res) {
-                            if (err) throw err;
-                            console.log(`\n${res.affectedRows} role inserted!\n`);
-                            startMenu();
-                        }
-                    );
-                });
+        inquirer
+        .prompt([
+            {
+            name: 'title',
+            type: 'input',
+            message: 'Enter the title of the role:'
+             },
+             {
+             name: 'salary',
+             type: 'input',
+             message: 'Enter the salary of the role:'
+             },
+             {
+             name: 'department',
+             type: 'list',
+             message: 'Choose the department:',
+             choices: departments.map(department => ({ name: department.name, value: department.id }))
+             }
+             ])
+            .then(function (answer) {
+                dbConnect.query(
+                     'INSERT INTO roles SET ?',
+                     { title: answer.title, salary: answer.salary, department_id: answer.department },
+                     function (err, res) {
+                        if (err) throw err;
+                        console.log(`\n${res.affectedRows} role inserted!\n`);
+                        startMenu();
+                     }
+                );
+            });
         }
     );
 }
@@ -242,21 +242,21 @@ function updateEmployeeRole() {
                 'SELECT * FROM roles',
                 function (err, roles) {
                     if (err) throw err;
-                    inquirer
-                        .prompt([
-                            {
-                                name: 'employee',
-                                type: 'list',
-                                message: 'Select the employee to update:',
-                                choices: employees.map(employee => ({ name: `${employee.first_name} ${employee.last_name}`, value: employee.id }))
-                            },
-                            {
-                                name: 'role',
-                                type: 'list',
-                                message: 'Select the new role for the employee:',
-                                choices: roles.map(role => ({ name: role.title, value: role.id }))
-                            }
-                        ])
+             inquirer
+              .prompt([
+                {
+                name: 'employee',
+                 type: 'list',
+                 message: 'Select the employee to update:',
+                 choices: employees.map(employee => ({ name: `${employee.first_name} ${employee.last_name}`, value: employee.id }))
+                },
+                {
+                name: 'role',
+                type: 'list',
+                message: 'Select the new role for the employee:',
+                choices: roles.map(role => ({ name: role.title, value: role.id }))
+                }
+                      ])
                         .then(function (answer) {
                             dbConnect.query(
                                 'UPDATE employees SET ? WHERE ?',
@@ -289,16 +289,16 @@ function updateEmployeeManager() {
             inquirer
                 .prompt([
                     {
-                        name: 'employee',
-                        type: 'list',
-                        message: 'Select the employee to update:',
-                        choices: employees.map(employee => ({ name: `${employee.first_name} ${employee.last_name}`, value: employee.id }))
+                    name: 'employee',
+                    type: 'list',
+                    message: 'Select the employee to update:',
+                    choices: employees.map(employee => ({ name: `${employee.first_name} ${employee.last_name}`, value: employee.id }))
                     },
                     {
-                        name: 'manager',
-                        type: 'list',
-                        message: 'Select the new manager for the employee:',
-                        choices: employees.map(employee => ({ name: `${employee.first_name} ${employee.last_name}`, value: employee.id }))
+                    name: 'manager',
+                    type: 'list',
+                    message: 'Select the new manager for the employee:',
+                    choices: employees.map(employee => ({ name: `${employee.first_name} ${employee.last_name}`, value: employee.id }))
                     }
                 ])
                 .then(function (answer) {
@@ -341,7 +341,7 @@ function viewEmployeesByManager() {
 
 function viewEmployeesByDepartment() {
     dbConnect.query(
-        `SELECT departments.name AS department, employees.id, employees.first_name, employees.last_name, roles.title, roles.salary
+        `SELECT departments.name AS departments, employees.id, employees.first_name, employees.last_name, roles.title, roles.salary
         FROM employees
         LEFT JOIN roles ON employees.role_id = roles.id
         LEFT JOIN departments ON roles.department_id = departments.id
@@ -383,7 +383,7 @@ function deleteRole() {
         })
         .then(function (answer) {
             dbConnect.query(
-                'DELETE FROM role WHERE ?',
+                'DELETE FROM roles WHERE ?',
                 { id: answer.roleId },
                 function (err, res) {
                     if (err) throw err;
