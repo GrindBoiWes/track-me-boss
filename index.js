@@ -222,7 +222,7 @@ function addEmployee() {
             function (err) {
                 if (err) throw (err);
                 console.log(`Added employee: ${answer.first_name} ${answer.last_name}`);
-                startMenu()
+                startMenu();
             }
         );
       });
