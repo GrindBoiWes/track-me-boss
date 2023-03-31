@@ -127,7 +127,7 @@ function viewEmployees() {
         function (err, res) {
             if (err) throw err;
             console.log(res);
-           
+           startMenu();
         }
     );
 }
@@ -146,6 +146,7 @@ function addDepartment() {
                 function (err, res) {
                     if (err) throw err;
                     console.log(`\n${res.affectedRows} department inserted!\n`);
+                    startMenu();
                 }
             );
         });
@@ -344,7 +345,7 @@ function viewEmployeesByDepartment() {
         FROM employees
         LEFT JOIN roles ON employees.role_id = roles.id
         LEFT JOIN departments ON roles.department_id = departments.id
-        ORDER BY departmenst, employees.last_name`,
+        ORDER BY departments, employees.last_name`,
         function (err, res) {
             if (err) throw err;
             console.table(res);

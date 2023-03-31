@@ -1,4 +1,4 @@
-/*USE employee_tracked;*/
+USE employee_tracked;
 
 INSERT INTO departments (name)
 VALUES ('Sales'),
