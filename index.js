@@ -118,12 +118,7 @@ function viewRoles() {
 
 function viewEmployees() {
     dbConnect.query(
-        `SELECT employees.id, employees.first_name, employees.last_name, roles.title, departments.name AS departments, roles.salary,
-        CONCAT(managers.first_name, ' ', managers.last_name) AS manager
-        FROM employees
-        LEFT JOIN roles ON employees.role_id = roles.id
-        LEFT JOIN departments ON roles.departments_id = departments.id
-        LEFT JOIN employee AS managers ON employees.manager_id = managers.id`,
+        "SELECT employees.id, employees.first_name, employees.last_name, roles.title, departments.name AS departments, roles.salary, CONCAT(managers.first_name, ' ', managers.last_name) AS managers FROM employees LEFT JOIN roles on employees.role_id = roles.id LEFT JOIN departments on roles.department_id = departments.id LEFT JOIN employees managers on managers.id = employees.manager_id;",
         function (err, res) {
             if (err) throw err;
             console.log(res);
