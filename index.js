@@ -1,5 +1,5 @@
 const inquirer = require('inquirer');
-const { viewDepartments } = require('./db/database');
+const database = require('./db/database');
 require('console.table');
 
 const {
