@@ -2,7 +2,7 @@
 const inquirer = require('inquirer');
 const mysql = require('mysql2');
 require('console.table');
-const { startMenu } = require('..');
+// const { startMenu } = require('..');
 require('dotenv').config();
 
 const dbConnect = mysql.createConnection({
@@ -30,7 +30,7 @@ function viewRoles() {
         JOIN departments ON roles.department_id = departments.id`,
         function (err, res) {
             if (err) throw err;
-            console.log(res);
+            console.table(res);
            
         }
     );
