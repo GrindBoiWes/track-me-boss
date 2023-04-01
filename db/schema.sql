@@ -1,8 +1,9 @@
+/* This section will create a new database called employee_tracked while also deleting if a previously named exists */
 DROP DATABASE IF EXISTS employee_tracked;
 CREATE DATABASE employee_tracked;
-
+/* This section runs the newly created database */
 USE employee_tracked;
-
+/* The code below will create all new tables inside the database. Each with different identifiers */
 CREATE TABLE departments (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) NOT NULL

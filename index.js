@@ -2,14 +2,14 @@ const inquirer = require('inquirer');
 const database = require('./db/database');
 require('console.table');
 const mysql = require('mysql2');
-
+// This section uses consts to make use user input without displaying sensitive information such as passwords
 const dbConnect = mysql.createConnection({
     host: 'localhost',
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME
 });
-
+// The startMenu function displays the prompts. Using the type 'list' will give you the ability to use the arrow keys to select the desired path
 function startMenu() {
     inquirer
       .prompt ({
@@ -32,6 +32,7 @@ function startMenu() {
             'Quit'
         ]
       })
+      // This section will have it continuously render the prompts once a path is selected
       .then(function(answer) {
 
         switch(answer.action) {
@@ -91,13 +92,13 @@ function startMenu() {
 
       });
 };
-
+// The functions below will display the given results from the prompts above. Having startMenu inside each function will keep it rendering the results of the prompts above
 function viewDepartments() {
     dbConnect.query(
         'SELECT id, name FROM departments',
         function (err, res) {
             if (err) throw err;
-            console.log(res);
+            console.table(res);
            startMenu();
         }
     );
@@ -110,7 +111,7 @@ function viewRoles() {
         JOIN departments ON roles.department_id = departments.id`,
         function (err, res) {
             if (err) throw err;
-            console.log(res);
+            console.table(res);
            startMenu();
         }
     );
@@ -121,9 +122,10 @@ function viewEmployees() {
         "SELECT employees.id, employees.first_name, employees.last_name, roles.title, departments.name AS departments, roles.salary, CONCAT(managers.first_name, ' ', managers.last_name) AS managers FROM employees LEFT JOIN roles on employees.role_id = roles.id LEFT JOIN departments on roles.department_id = departments.id LEFT JOIN employees managers on managers.id = employees.manager_id;",
         function (err, res) {
             if (err) throw err;
-            console.log(res);
+            console.table(res);
            startMenu();
         }
+       
     );
 }
 
@@ -177,7 +179,7 @@ function addRole() {
                      { title: answer.title, salary: answer.salary, department_id: answer.department },
                      function (err, res) {
                         if (err) throw err;
-                        console.log(`\n${res.affectedRows} role inserted!\n`);
+                        console.table(`\n${res.affectedRows} role inserted!\n`);
                         startMenu();
                      }
                 );
@@ -409,7 +411,7 @@ function deleteEmployee() {
         });
 }
 startMenu();
-
+// Exports all the functions
 module.exports = {
     startMenu,
     viewDepartments,
